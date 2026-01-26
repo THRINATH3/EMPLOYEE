@@ -9,13 +9,15 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.Pattern;
-import jakarta.validation.constraints.Positive;
 import jakarta.validation.constraints.PositiveOrZero;
 import jakarta.validation.constraints.PastOrPresent;
 import jakarta.validation.constraints.Size;
@@ -52,9 +54,9 @@ public class EmployeesEntity {
     @Column(name = "role")
     private String role;
 
-    @Positive(message = "Department ID must be valid")
-    @Column(name = "department_id")
-    private int department_id;
+	@ManyToOne
+	@JoinColumn(name = "dept_id",nullable = false)
+    private DepartmentsEntity department;
     
     @PastOrPresent
     @Column(name = "date_of_joining")
@@ -77,6 +79,10 @@ public class EmployeesEntity {
 
     @OneToMany(mappedBy = "employee")
     private List<PayrollsEntity> payrolls;
+   
+    @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
+    private ProjectsEntity project;
     
 	public List<PayrollsEntity> getPayrolls() {
 		return payrolls;
@@ -138,13 +144,27 @@ public class EmployeesEntity {
 		this.designation = designation;
 	}
 
-	public int getDepartment_id() {
-		return department_id;
+	
+
+	public DepartmentsEntity getDepartment() {
+		return department;
 	}
 
-	public void setDepartment_id(int department_id) {
-		this.department_id = department_id;
+
+	public void setDepartment(DepartmentsEntity department) {
+		this.department = department;
 	}
+
+
+	public ProjectsEntity getProject() {
+		return project;
+	}
+
+
+	public void setProject(ProjectsEntity project) {
+		this.project = project;
+	}
+
 
 	public boolean isNotice() {
 		return isNotice;

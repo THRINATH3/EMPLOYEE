@@ -1,5 +1,7 @@
 package com.example.entity;
 
+import java.util.List;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -19,10 +21,20 @@ public class DepartmentsEntity {
     @Column(name="location", nullable = false)
     private String location;
     
-    public DepartmentsEntity() {}
+    @OneToMany(mappedBy = "department")
+    private List<EmployeesEntity> employees;
+    
 
 	public Long getId() {
 		return id;
+	}
+
+	public List<EmployeesEntity> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<EmployeesEntity> employees) {
+		this.employees = employees;
 	}
 
 	public void setId(Long id) {

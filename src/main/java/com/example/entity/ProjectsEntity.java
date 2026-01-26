@@ -1,9 +1,11 @@
 package com.example.entity;
 
 import java.time.*;
+import java.util.List;
 
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
+
 
 @Entity
 @Table(name = "projects")
@@ -12,6 +14,7 @@ public class ProjectsEntity {
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+	
 	
 	@NotBlank(message = "Project name cannot be empty")
     @Size(max = 100, message = "Project name cannot exceed 100 characters")
@@ -34,7 +37,17 @@ public class ProjectsEntity {
     @Column(name="status", nullable = false)
     private String status;
 	
-	public ProjectsEntity() {}
+	@OneToMany(mappedBy = "project")
+	private List<EmployeesEntity> employees;
+	
+
+	public List<EmployeesEntity> getEmployees() {
+		return employees;
+	}
+
+	public void setEmployees(List<EmployeesEntity> employees) {
+		this.employees = employees;
+	}
 
 	public Long getId() {
 		return id;
