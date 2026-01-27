@@ -10,5 +10,5 @@ import com.example.entity.EmployeesEntity;
 @Repository
 public interface EmployeeRepository extends JpaRepository<EmployeesEntity, Integer> {
 
-    Optional<EmployeesEntity> findByEmail(String email);
+    EmployeesEntity findByEmail(String email);
 }

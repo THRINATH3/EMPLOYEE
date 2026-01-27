@@ -12,9 +12,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.function.EntityResponse;
 
+import com.example.dtos.LoginReguestDTO;
 import com.example.dtos.RegisterResponseDTO;
 import com.example.entity.EmployeesEntity;
 import com.example.service.EmployeeService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("/employees")
@@ -29,10 +32,17 @@ public class EmployeeController {
 	}
 	
 	@PostMapping("/addEmployee")
-	public ResponseEntity<?> addEmployee(@RequestBody EmployeesEntity emp) {
+	public ResponseEntity<?> addEmployee(@Valid @RequestBody EmployeesEntity emp) {
 		Object res = employeeService.addEmployee(emp);
 		if(res != null) return ResponseEntity.ok().body(res);
 		return ResponseEntity.badRequest().body("Employee already exist");
+	}
+	
+	@PostMapping("/login")
+	public ResponseEntity<?> loginEmployee(@RequestBody LoginReguestDTO req){
+		String res = employeeService.loginEmployee(req);
+		if(res == null) return ResponseEntity.badRequest().body("Invalid Credentials");
+		return ResponseEntity.ok().body(res);
 	}
 	
 	@GetMapping("/getEmployees/{pid}")

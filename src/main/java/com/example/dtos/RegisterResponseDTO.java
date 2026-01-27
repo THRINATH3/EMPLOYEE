@@ -1,6 +1,7 @@
 package com.example.dtos;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class RegisterResponseDTO {
 
@@ -10,7 +11,12 @@ public class RegisterResponseDTO {
     private String phone;
     private String designation;
     private String role;
-    private LocalDate date_of_joining;
+    private LocalDate dateOfJoining;
+
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private boolean isNotice;
+    private int noticePeriod;
 
     public RegisterResponseDTO(
             int id,
@@ -19,7 +25,11 @@ public class RegisterResponseDTO {
             String phone,
             String designation,
             String role,
-            LocalDate date_of_joining
+            LocalDate dateOfJoining,
+            LocalDateTime createdAt,
+            LocalDateTime updatedAt,
+            boolean isNotice,
+            int noticePeriod
     ) {
         this.id = id;
         this.name = name;
@@ -27,8 +37,14 @@ public class RegisterResponseDTO {
         this.phone = phone;
         this.designation = designation;
         this.role = role;
-        this.date_of_joining = date_of_joining;
+        this.dateOfJoining = dateOfJoining;
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+        this.isNotice = isNotice;
+        this.noticePeriod = noticePeriod;
     }
+
+    // ---------- Getters & Setters ----------
 
     public int getId() {
         return id;
@@ -41,7 +57,7 @@ public class RegisterResponseDTO {
     public String getName() {
         return name;
     }
-
+    
     public void setName(String name) {
         this.name = name;
     }
@@ -78,11 +94,43 @@ public class RegisterResponseDTO {
         this.role = role;
     }
 
-    public LocalDate getDate_of_joining() {
-        return date_of_joining;
+    public LocalDate getDateOfJoining() {
+        return dateOfJoining;
     }
 
-    public void setDate_of_joining(LocalDate date_of_joining) {
-        this.date_of_joining = date_of_joining;
+    public void setDateOfJoining(LocalDate dateOfJoining) {
+        this.dateOfJoining = dateOfJoining;
+    }
+
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public LocalDateTime getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(LocalDateTime updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public boolean isNotice() {
+        return isNotice;
+    }
+
+    public void setNotice(boolean isNotice) {
+        this.isNotice = isNotice;
+    }
+
+    public int getNoticePeriod() {
+        return noticePeriod;
+    }
+
+    public void setNoticePeriod(int noticePeriod) {
+        this.noticePeriod = noticePeriod;
     }
 }

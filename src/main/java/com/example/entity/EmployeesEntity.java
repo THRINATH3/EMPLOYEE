@@ -45,6 +45,14 @@ public class EmployeesEntity {
     @Column(name = "phone")
     private String phone;
 
+    @NotBlank(message = "Password is required")
+    @Pattern(
+            regexp = "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*#?&]).{8,}$",
+            message = "Password must contain 8+ characters, 1 uppercase, 1 lowercase, 1 number, 1 special character"
+    )
+    @Column(name = "Password")
+    private String password;
+    
     @NotBlank(message = "Designation is required")
     @Column(name = "designation")
     private String designation;
@@ -91,6 +99,16 @@ public class EmployeesEntity {
 
 	public void setPayrolls(List<PayrollsEntity> payrolls) {
 		this.payrolls = payrolls;
+	}
+
+
+	public String getPassword() {
+		return password;
+	}
+
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 
 
