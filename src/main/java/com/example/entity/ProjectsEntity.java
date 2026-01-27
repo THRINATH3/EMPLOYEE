@@ -3,6 +3,8 @@ package com.example.entity;
 import java.time.*;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -38,6 +40,7 @@ public class ProjectsEntity {
     private String status;
 	
 	@OneToMany(mappedBy = "project")
+	@JsonIgnore
 	private List<EmployeesEntity> employees;
 	
 

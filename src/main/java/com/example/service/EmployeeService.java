@@ -60,4 +60,9 @@ public class EmployeeService {
                 ))
                 .toList();
     }
+    
+    public long countEmployeesOnNotice() {
+        return employeeRepository.countByIsNoticeTrue();
+    }
+
 }

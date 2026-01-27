@@ -10,8 +10,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.servlet.function.EntityResponse;
-
 import com.example.dtos.RegisterResponseDTO;
 import com.example.entity.EmployeesEntity;
 import com.example.service.EmployeeService;
@@ -40,4 +38,10 @@ public class EmployeeController {
 		 List<RegisterResponseDTO> res = employeeService.getEmployee(pid);
 	     return ResponseEntity.ok(res);
 	}
+	
+	@GetMapping("/notice/count")
+	public ResponseEntity<Long> getEmployeesOnNoticeCount() {
+	    return ResponseEntity.ok(employeeService.countEmployeesOnNotice());
+	}
+
 }

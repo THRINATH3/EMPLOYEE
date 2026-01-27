@@ -11,4 +11,6 @@ import com.example.entity.EmployeesEntity;
 public interface EmployeeRepository extends JpaRepository<EmployeesEntity, Integer> {
 
     Optional<EmployeesEntity> findByEmail(String email);
+    
+    long countByIsNoticeTrue();
 }
