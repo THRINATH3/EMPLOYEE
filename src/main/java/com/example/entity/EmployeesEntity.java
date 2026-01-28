@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -86,6 +88,7 @@ public class EmployeesEntity {
     private LocalDateTime updated_at;
 
     @OneToMany(mappedBy = "employee")
+    @JsonIgnore
     private List<PayrollsEntity> payrolls;
    
     @ManyToOne

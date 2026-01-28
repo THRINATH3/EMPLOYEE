@@ -2,6 +2,8 @@ package com.example.entity;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 
@@ -22,6 +24,7 @@ public class DepartmentsEntity {
     private String location;
     
     @OneToMany(mappedBy = "department")
+    @JsonIgnore
     private List<EmployeesEntity> employees;
     
 
