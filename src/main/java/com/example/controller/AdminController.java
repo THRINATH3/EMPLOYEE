@@ -1,5 +1,6 @@
 package com.example.controller;
 
+import java.lang.module.ResolutionException;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +28,7 @@ public class AdminController {
 	    }
 	    
 	    @GetMapping("/completed")
-	    public ResponseEntity<?> getOngoingProjectsCount() {
+	    public ResponseEntity<?> getCompletedProjects() {
 	        return ResponseEntity.ok(adminService.getCompletedProjects());
 	    }
 
@@ -36,10 +37,24 @@ public class AdminController {
 	        return ResponseEntity.ok(adminService.getCompletedProjectsCount());
 	    }
 	    
+	    @GetMapping("count/ongoing")
+	    public ResponseEntity<Long> getOngoingProjectsCount(){
+	    	return ResponseEntity.ok(adminService.getOngoingProjectsCount());
+	    }
+	    
+	    
+	    //Salary Filter
 	    @GetMapping("/net-salary")
-		public List<PayrollsEntity> filterByNetSalary(
+		public ResponseEntity<List<PayrollsEntity>>  filterByNetSalary(
 		        @RequestParam double min,
 		        @RequestParam double max) {
-		    return adminService.findPayrollsByNetSalaryRange(min, max);
+		    return ResponseEntity.ok().body(adminService.findPayrollsByNetSalaryRange(min, max)); 
 		}
+	    
+	    //Sorted-Order based on Salary
+	    @GetMapping("/salarySorted")
+	    public ResponseEntity<?> salarySorted(@RequestParam String typ) {
+	    		return ResponseEntity.ok().body(adminService.salarySorted(typ));
+	    }
+	    
 }

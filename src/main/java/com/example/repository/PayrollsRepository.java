@@ -18,4 +18,7 @@ public interface PayrollsRepository extends JpaRepository<PayrollsEntity, Intege
 	            @Param("min") double min,
 	            @Param("max") double max
 	    );
+		
+		List<PayrollsEntity> findAllByOrderByNet_salaryAsc();
+		List<PayrollsEntity> findAllByOrderByNet_salaryDesc();
 }

@@ -2,7 +2,9 @@ package com.example.service;
 
 import java.util.List;
 
+import org.jspecify.annotations.Nullable;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.data.autoconfigure.web.DataWebProperties.Sort;
 import org.springframework.stereotype.Service;
 
 import com.example.entity.PayrollsEntity;
@@ -34,4 +36,21 @@ public class AdminService {
 	public List<PayrollsEntity> findPayrollsByNetSalaryRange(double min, double max) {
 		return payrollsRepository.findPayrollsByNetSalaryRange(min, max);
 	}
+
+	public long getOngoingProjectsCount() {
+		return projectsRepository.countByStatus("ONGOING");
+	}
+
+	public List<PayrollsEntity> salarySorted(String typ) {
+
+	    if ("ASC".equalsIgnoreCase(typ)) {
+	        return payrollsRepository.findAllByOrderByNet_salaryAsc();
+	    } 
+	    else if ("DESC".equalsIgnoreCase(typ)) {
+	        return payrollsRepository.findAllByOrderByNet_salaryDesc();
+	    }
+
+	    throw new IllegalArgumentException("Invalid sort type");
+	}
+
 }
