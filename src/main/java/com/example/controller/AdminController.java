@@ -51,6 +51,7 @@ public class AdminController {
 		    return ResponseEntity.ok().body(adminService.findPayrollsByNetSalaryRange(min, max)); 
 		}
 	    
+	    
 	    //Sorted-Order based on Salary
 	    @GetMapping("/salarySorted")
 	    public ResponseEntity<?> salarySorted(@RequestParam String typ) {
